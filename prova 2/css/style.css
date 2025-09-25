@@ -1,0 +1,62 @@
+:root{
+    --linear-gradient: 90deg, #38bdf8, #6d28d9, #4c1d95;
+}
+
+body{
+    height: 100vh;
+    background: linear-gradient(var(--linear-gradient));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+p{
+    width: 85%;
+    margin: 0;
+    text-align: justify;
+    color: white;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+img{
+    height: 500px;
+}
+.central{
+    width: 950px;
+    background: #262626;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.323);
+    font-size: xx-small;
+}
+
+.central .botoes button{
+    width: 150px;
+    height: 30px;
+    background-color: #6d28d9;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.75s;
+    color: white;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+}
+
+.container img{
+    margin: 50px;
+}
+.container p{
+    margin: 50px;
+}
+
+.central .botoes button:hover{
+    background: black;
+    color: rgb(255, 145, 0);
+    transform: translateY(3px);
+}
