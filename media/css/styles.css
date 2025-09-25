@@ -1,0 +1,86 @@
+body{
+    height: 100vh;
+    margin: 0;
+    background: black;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fundo{
+    min-width: 100%;
+    z-index: -1;
+    position: absolute;
+    object-fit: cover;
+    height: 100%;
+    /*filter: blur(3px);
+    /*opacity: 40%;*/
+}
+
+.central{
+    width: fit-content;
+    background: rgb(19, 93, 189);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 10px 10px 20px black;
+}
+
+.central span{
+    font-size: 20px;
+    font-family: verdana;
+    font-weight: bold;
+    color: white;
+}
+
+.central input{
+    width: 100%;
+    border: none;
+    outline: none;
+    height: 30px;
+    border-radius: 20px;
+    box-shadow: 3px 3px 13px black;
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+    transition: 0.75s;
+}
+
+.central input:focus{
+    background: rgb(211, 187, 52);
+    /*background: rgb(255, 0, 76);*/
+    color: white;
+    transform: translateY(3px);
+    
+}
+
+.central div{
+    margin-bottom: 10px;
+}
+
+.central button{
+    width: 100px;
+    height: 30px;
+    background: rgb(0, 0, 0);
+    border: none;
+    border-radius: 10px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.75s;
+    box-shadow: 3px 3px 13px black;
+    display: block;
+    margin: auto;
+    color: white;
+}
+
+.central button:hover{
+    /*background: rgb(255, 0, 76);*/
+    background: rgb(211, 187, 52);
+    color: white;
+    transform: translateY(3px);
+}
+
+.central #resultado{
+    color: white;
+    margin: auto;
+    text-align: center;
+}
