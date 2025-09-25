@@ -1,0 +1,30 @@
+body{
+    height: 100vh;
+    background: linear-gradient(black,rgb(0, 140, 255),black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+img{
+    height: 300px;
+}
+.central{
+    width: fit-content;
+    background: rgb(8, 19, 36);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 15px black;
+}
+.central .botoes button{
+    width: 60px;
+    background-color: rgb(39, 98, 199);
+    border: none;
+    cursor: pointer;
+    transition: 0.75s;
+}
+.central .botoes button:hover{
+    background: black;
+    color: rgb(0, 140, 255);
+    transform: translateY(3px);
+}
