@@ -1,0 +1,418 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+*{
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+    font-family:'Inter', sans-serif;
+}
+
+body{
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    /* fundo escuro com imagem de Van Gogh (uso como camada + gradiente para melhor legibilidade) */
+    background-color: #020105;
+    /* reduzir alpha da camada escura para clarear a imagem de fundo */
+    background-image: linear-gradient(rgba(2,1,5,0.20), rgba(2,1,5,0.20)), url('../img/papel-de-parede-a-noite-estrelada-por-vincent-van-gogh.jpg.webp');
+    background-repeat: no-repeat, no-repeat;
+    background-position: center center, center center;
+    background-size: cover, cover;
+    transition: background 1s ease, color 1s ease;
+}
+
+.container{
+    width:80%;
+    height:80vh;
+    display:flex;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 25px 50px rgba(0,0,0,0.25);
+    transition: background 1s ease;
+}
+
+/* LADO ESQUERDO */
+.form-image{
+    width:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#c6a40a;
+    padding:1rem;
+    transition: background 1s ease;
+}
+
+.form-image img{
+    max-width:100%;
+}
+
+/* LADO DIREITO */
+.form{
+    width:50%;
+    position:relative;
+    padding:3rem;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    overflow:visible; /* permitir que nuvens decorativas ultrapassem */
+    background:linear-gradient(180deg,#24347a,#0d1644);
+    color:white;
+    transition: background 1s ease, color 1s ease;
+}
+
+/* ESTRELAS */
+.stars{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background-image:
+        radial-gradient(2px 2px at 10px 20px, white, transparent),
+        radial-gradient(2px 2px at 60px 90px, white, transparent),
+        radial-gradient(2px 2px at 120px 40px, white, transparent),
+        radial-gradient(2px 2px at 180px 160px, white, transparent),
+        radial-gradient(2px 2px at 240px 80px, white, transparent),
+        radial-gradient(1.5px 1.5px at 300px 120px, white, transparent),
+        radial-gradient(2px 2px at 360px 50px, white, transparent),
+        radial-gradient(1.5px 1.5px at 420px 190px, white, transparent),
+        radial-gradient(2px 2px at 500px 130px, white, transparent);
+    background-repeat:repeat;
+    opacity:0.4;
+}
+
+/* estrelas em forma de cruz usando pseudo-elementos */
+.stars::before,
+.stars::after {
+    content: '';
+    position: absolute;
+    background: white;
+    pointer-events: none;
+}
+
+/* barras verticais das cruzes */
+.stars::before {
+    width: 1px;
+    height: 7px;
+    box-shadow:
+        50px 60px,
+        120px 30px,
+        200px 80px,
+        340px 50px,
+        420px 160px;
+}
+
+/* barras horizontais das cruzes (mesmas coordenadas) */
+.stars::after {
+    width: 7px;
+    height: 1px;
+    box-shadow:
+        50px 60px,
+        120px 30px,
+        200px 80px,
+        340px 50px,
+        420px 160px;
+}
+
+/* LUA */
+.moon{
+    position:absolute;
+    top:60px;
+    right:70px;
+    width:70px;
+    height:70px;
+    background:#f2f4ff;
+    border-radius:50%;
+    box-shadow:-18px 0 0 0 #24347a,
+               0 0 10px 2px #fff,       /* brilho neon branco */
+               0 0 20px 5px rgba(255,255,255,0.5);
+    cursor:pointer;
+    transition: all 0.6s ease;
+    z-index:100;
+}
+
+/* estado de sol quando a lua é clicada */
+.moon.sun{
+    /* desliza levemente para a esquerda, encolhe um pouco, muda cor para amarelo e brilha */
+    transform: translateX(-50px) scale(0.75);
+    background:#ffdd57;
+    box-shadow:0 0 30px #ffdd57;
+}
+
+.moon .rays {
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:0;
+    height:0;
+    transform: translate(-50%, -50%);
+    animation: rays-orbit 4s linear infinite;
+    pointer-events:none;
+}
+
+.moon .rays span {
+    position:absolute;
+    width:0;
+    height:0;
+    border-left:6px solid transparent;
+    border-right:6px solid transparent;
+    border-bottom:15px solid #ffdd57;
+    transform-origin:0 0;
+    opacity:0;
+    transition: opacity 0.3s;
+}
+
+.moon.sun .rays span {
+    opacity:1;
+}
+
+.moon .rays span:nth-child(1){ transform: translate(-3px,-50px) rotate(0deg); }
+.moon.sun .rays span:nth-child(2){ transform: translate(35px,-35px) rotate(45deg); }
+.moon.sun .rays span:nth-child(3){ transform: translate(50px,-3px) rotate(90deg); }
+.moon.sun .rays span:nth-child(4){ transform: translate(35px,35px) rotate(135deg); }
+.moon.sun .rays span:nth-child(5){ transform: translate(-3px,50px) rotate(180deg); }
+.moon.sun .rays span:nth-child(6){ transform: translate(-35px,35px) rotate(225deg); }
+.moon.sun .rays span:nth-child(7){ transform: translate(-50px,-3px) rotate(270deg); }
+.moon.sun .rays span:nth-child(8){ transform: translate(-35px,-35px) rotate(315deg); }
+
+@keyframes rays-pulse {
+    0%,100% { opacity:0.8; }
+    50%    { opacity:1; }
+}
+
+@keyframes rays-orbit {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* TEMA CLARO/ESCURO */
+body.light-theme{
+    /* gradiente vertical sutil, mais claro no topo */
+    background: linear-gradient(180deg, #f8f9fa, #e2e6ea);
+}
+
+/* LAYOUT RESPONSIVO */
+@media screen and (max-width: 900px) {
+    .container {
+        flex-direction: column;
+        width: 90%;
+        height: auto;
+    }
+
+    .form-image {
+        display: none;
+    }
+
+    .form {
+        width: 100%;
+        padding: 2rem 1rem;
+    }
+
+    .input-group {
+        flex-direction: column;
+    }
+
+    .input-box {
+        width: 100%;
+    }
+}
+
+/* ocultar pontinhos de estrela no modo claro */
+body.light-theme .stars {
+    display: none;
+}
+
+/* opcionalmente diminuir nuvens também */
+body.light-theme .cloud {
+    opacity: 0.1;
+}
+
+body.light-theme .form{
+    /* simular tom claro de duas cores (branco e quase-branco) */
+    background: linear-gradient(180deg, #ffffff, #f5f5f1);
+    color: #000;
+}
+
+body.light-theme .form-image{
+    background: #5379b1; /* ligeiramente mais escuro para separação */
+}
+
+body.light-theme{
+    color:#000;
+}
+
+body.light-theme .input-box input{
+    background:#fff;
+    color:#000;
+}
+
+body.light-theme .input-box input::placeholder{
+    color:#666;
+}
+
+/* NUVENS */
+.cloud{
+    position:absolute;
+    background:rgba(255,255,255,0.08);
+    border-radius:100px;
+    filter:blur(30px);
+    pointer-events:none;
+}
+
+.cloud1{
+    width:300px;
+    height:120px;
+    bottom:80px;
+    left:-80px;
+}
+
+.cloud2{
+    width:250px;
+    height:100px;
+    bottom:150px;
+    right:-80px;
+}
+
+.cloud3{
+    position:absolute;
+    width:140px;
+    height:100px;
+    top:10px;
+    right:20px;
+    background:rgba(255,255,255,0.35);
+    opacity:0.9;
+    z-index:50;
+    /* construir forma irregular usando múltiplos círculos */
+    clip-path: circle(35px at 40px 40px) /* lóbulo esquerdo */
+             circle(30px at 90px 35px) /* lóbulo direito superior */
+             circle(25px at 70px 70px); /* lóbulo direito inferior */
+}
+/* FORM NA FRENTE */
+.form form{
+    position:relative;
+    z-index:2;
+}
+
+/* HEADER */
+.form-header{
+    margin-bottom:2.5rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.form-header h1{
+    font-size:2rem;
+    font-weight:700;
+}
+
+.form-header h1::after{
+    content:'';
+    display:block;
+    width:60px;
+    height:4px;
+    background:#7b8cff;
+    margin-top:8px;
+    border-radius:10px;
+}
+
+/* BOTÃO ENTRAR */
+.login-button button{
+    border:none;
+    background:linear-gradient(90deg,#7b8cff,#5f6fff);
+    padding:0.4rem 1.2rem;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+.login-button a{
+    text-decoration:none;
+    color:#fff;
+    font-weight:500;
+}
+
+/* nova classe para link de login com aparência de botão */
+.login-link {
+    display:inline-block;
+    border:none;
+    background:linear-gradient(90deg,#7b8cff,#5f6fff);
+    padding:0.4rem 1.2rem;
+    border-radius:20px;
+    cursor:pointer;
+    text-decoration:none;
+    color:#fff;
+    font-weight:500;
+}
+
+.login-link:hover {
+    opacity:0.9;
+}
+
+/* INPUTS */
+.input-group{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+}
+
+.input-box{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:1.1rem;
+    width:48%;
+}
+
+.input-box label,
+.gender-title h6{
+    font-size:0.75rem;
+    color:#c7ccff;
+}
+
+.input-box input{
+    margin:0.6rem 0;
+    padding:0.9rem 1rem;
+    border:none;
+    border-radius:14px;
+    background:#1b2a6b;
+    color:white;
+}
+
+.input-box input::placeholder{
+    color:#9aa6ff;
+}
+
+.input-box input:focus{
+    outline:2px solid #7b8cff;
+}
+
+/* GÊNERO */
+.gender-group{
+    display:flex;
+    justify-content:space-between;
+    margin-top:0.8rem;
+}
+
+.gender-input{
+    display:flex;
+    align-items:center;
+}
+
+.gender-input input{
+    margin-right:0.35rem;
+}
+
+.gender-input label{
+    font-size:0.8rem;
+    color:#c7ccff;
+}
+
+/* BOTÃO CONTINUAR */
+.continue-button button{
+    width:100%;
+    margin-top:2.5rem;
+    border:none;
+    background:linear-gradient(90deg,#7b8cff,#5f6fff);
+    padding:1rem;
+    border-radius:40px;
+    cursor:pointer;
+}
